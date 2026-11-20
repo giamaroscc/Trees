@@ -1,0 +1,185 @@
+\documentclass[]{article}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{float}
+
+%opening
+\title{}
+\author{}
+
+
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+		[100
+			[50
+				[25
+					[10]
+					[90]
+				]
+				[75
+					[65]
+					[80]
+				]
+			]
+			[150
+				[125
+					[110]
+					[130]
+				]
+				[200
+					[175]
+					[225]
+				]
+			]
+		]
+	\end{forest}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\[ 2^n-1\]
+to delete a node with no child or with one is
+Time complexity \[ L = \log_2  (n)\]
+which comes from $n = 2^L$
+
+
+\section{In-order traversal}
+An example for in order: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+	\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+	[* 
+		[A]
+		[+
+			[B]
+			[C]
+			]
+	]
+	\end{forest}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+as long as one node in the tree breaks the balance rule, it will make the whole tree not balanced. remmeber it is nablanced when it has no more than one node that is unbalanced. 
+
+
+
+
+\begin{itemize}
+\item{Infix: $A \cdot (C+C)$}
+\item{Prefix $\cdot A + BC$}
+\item{Postfix: $ABC+\cdot$}
+\end{itemize}
+Case 1: deleting a node with no children
+\begin{table}[H]
+	\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+		[80
+			[52
+				[48]
+				[71]
+			]
+		]
+	\end{forest}
+\end{table}
+\begin{table}[H]
+	\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+		[80
+		[52
+		[48]
+		]
+		]
+	\end{forest}
+\end{table}
+
+Case 2 deleting a node with one child
+\begin{table}[H]
+	\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+		[80
+		[52
+		[48]
+		[71]
+		]
+		]
+	\end{forest}
+\end{table}
+Case 3: deleting a node with three children
+find the sucessor for the topmost onne. find the smallest value of the subtree. go to the right childfind the smallest value of the subtrree
+
+
+
+
+
+
+
+\section{}
+Right rotation
+we turn this table
+\begin{table}[H]
+	\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+		[50
+		[25[
+		10]
+		]
+		]
+	\end{forest}
+\end{table}
+
+into this 
+\begin{table}[H]
+	\centering
+	\begin{forest}
+		for tree={draw,circle, align=center}
+		[25
+			[10]
+			[50]
+		]
+	\end{forest}
+\end{table}
+Doing it in the other order does a left rotation. There also exists a double rotation. 
+for 50 25 30 right left right we do left roation first to get 50 30 20 all going lft purely. (left rotation) next is a right rotaion. where we have 30 in the center, left is 25 and right is 50. 
+
+another example 50 75 60 left right left turns rr into 50 60 75 all goig right which turns into 60 and its children are 50 and 75 (left roration). these together make a double rotation. This is done to ensure that our nodes are balanced. next lecture is keeping a tree balanced. 
+
+
+(from We can either change the colour, or rotate. We use the colour as an indicator that we do rotations.   on)
+
+Terminal node is a node with no children (or leaf node).
+When traversing from the root to any $\textit{null child}$. leaf nodes have two null childs, those with one child have also one null child, those with two children have no null childs. count all the way to the null children, not terminal childs. Usually null childs are counted as black, but it doesnt matter as black height wont change since they will all get this additional null child anyway
+
+
+Imagine 5 20 1 10 4 6 7 3 8 9. which is random
+
+\begin{enumerate}
+\item{Let the 5 be the root, whch s then black.}
+\item{30, we add it to the rgiht because ts larger. reds cant have red so its black. Here it should make sese that the next node after the 20 should most certaintly be red, because if t were black it would dstrupt the balance/ black height further, which we don't want. make the next one (after 20 in the right red)}
+\item{1 smaller than 5 so left, its black.}
+\item{10 go to the right, less than 20 so left of the 20, we assume it always red so make it red, but now we have a prroblem, red parent (20) has red child 10. look at the uncle, which is the 1. Both uncle and parent are red, so bring down black from grandparent and give it to the uncle. now the uncle is black, 20 is black, 10 is red, but the root is red. to solve, simply change the red to a black. Solved!}
+\item{4, 4 smalle rthan 5 left, but bigger than 1 so goes to the right of 1. make it red, OK, black node with red child.}
+\item{6 bigger than 5, less than 20, less than 10 so left of 10. ake it red, red parent, red child; we have to change, using our rule, use the uncle. (the children of 20) but there is no uncle (non second child of 20), Assme the null is black, so we can't bring it down. We must do a rotation. (black uncle with red parent is the only time). Lets remove the null at this point. double rotation when parent and node child are on different sides, but theyre the same so. because theyre in one line, we do single rotation. Do a right rotation, when both are left children. rariise the 10 and drop the 20 . only. the new tree is 5 root, left 1 with right child 4. th toe right of 5 we have 10, with left child 6 and rirght child  20, but the colors of the orriginal tree are kept in place, that is, the color is retained to the place, not the number itself. (the right child of 5 is kept black)}
+\item{ use the 7, grete rthan 5, less than 10, greter than 6 so right child of 6, which is a red child, but red child red parent, so do the uncle rule. the 10 becomes red, 6 black, 7 is red, 20 is black. note its still balanced, so remains $\log (n)$. }
+\item{3, less than 5 greate rthan 1 les than 4 so left child of 4. null uncle, compare black uncle to red parent, so we cant bring down the grand parent, so do a left rotaton,   we need double rotation, do a right (CW) then left rotation. recall 1 black 4 right red, left red. right rotation: raise 3 drop 4..both parent and new node are right so do a left rotation. raise 3 drop 1 and bring 4 with you. so to the left black 5, left black 3, left red 1, and othe rchild of 3 is 4 right red.  still balanced. }
+\item{8, to the right of 7, red red, so look at uncle who is black. black uncle red parent dif colours so rotation! parent and new node are right childs so do a left rotation. raise 7, drop 6 and bring 8 with it, so we have 7 parent with childs 6 and 8 which rre both red. Count null childs also  so its still balanced.}
+\item{9 is greater than 8 so to the right of it. red and red  do uncle rule, 6 and 7 are different colors so we need a left rotation bc 8 and 9 are both to the right, so  change 7 to a red, disbribute black to 6 and 8. we create a new problem, 7 and 10 are red red. maybe i could learn family tree names in spanish this way, and italian? uncle and paret dont agree so rotate. 7 is a left child and 10 is a right child, righ rotation first raise 7 drop 10.  to ehe rght is 5 black, 7 red, 10 red, 20 black all right. left child of 7 is black 6, . the old 8 doesnt fit so we just have to move it to where it fits. bigger than 7 less than 10 so put there (called a $\textit{crossover}$,7 and 10 are red... 7 becomes root, left red child 5, right black child 6, other child of 5 is a black left child is 1 red, ight is 4 red. to the right of 7 is red 10, left 8 is black , rright child of 10 is black 20 right child of 8 is red 9. still balanced, and equal black height.}
+\end{enumerate}
+
+
+Now imagine non-random set of numbers
+\[ 1,2,3,4,5,6,7,8,9,10\]
+
+Binary search tree and \& red black tree. test he will upload binary search tree CODE on github. 
+\end{document}
