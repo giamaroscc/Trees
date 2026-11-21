@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{forest}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% [,phantom] = empty spot (keeps left/right children in the right place)
+\forestset{
+	default preamble={
+		for tree={circle, draw, minimum size=7mm, inner sep=1pt, s sep=5mm, l sep=9mm, font=\small},
+	},
+}
+
+\begin{document}
+	
+	\begin{center}
+		{\Large \textbf{Rotation Practice: Single Rotations}}
+	\end{center}
+	
+	\textbf{Reminder.}
+	\begin{itemize}
+		\item \textbf{Right rotation at a node:} raise its left child. The node drops down to the right. The raised node's old right child becomes the dropped node's new left child.
+		\item \textbf{Left rotation at a node:} raise its right child. The node drops down to the left. The raised node's old left child becomes the dropped node's new right child.
+	\end{itemize}
+	Each problem needs only one rotation. Draw the final tree, then check it at the end.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Problem 1}
+	\begin{center}
+		\begin{forest}
+			[50
+			[30
+			[20
+			[10]
+			[,phantom]
+			]
+			[,phantom]
+			]
+			[60]
+			]
+		\end{forest}
+	\end{center}
+	Do a \textbf{right rotation} at 50.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Problem 2}
+	\begin{center}
+		\begin{forest}
+			[20
+			[10]
+			[40
+			[,phantom]
+			[50
+			[,phantom]
+			[60]
+			]
+			]
+			]
+		\end{forest}
+	\end{center}
+	Do a \textbf{left rotation} at 20.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Problem 3}
+	\begin{center}
+		\begin{forest}
+			[60
+			[30
+			[20
+			[10]
+			[,phantom]
+			]
+			[40
+			[,phantom]
+			[50]
+			]
+			]
+			[80]
+			]
+		\end{forest}
+	\end{center}
+	Do a \textbf{right rotation} at 60.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Problem 4}
+	\begin{center}
+		\begin{forest}
+			[40
+			[20]
+			[70
+			[55
+			[50]
+			[,phantom]
+			]
+			[90
+			[,phantom]
+			[95]
+			]
+			]
+			]
+		\end{forest}
+	\end{center}
+	Do a \textbf{left rotation} at 40.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Problem 5}
+	\begin{center}
+		\begin{forest}
+			[50
+			[30
+			[20]
+			[40]
+			]
+			[80
+			[60
+			[55
+			[52]
+			[,phantom]
+			]
+			[65]
+			]
+			[90]
+			]
+			]
+		\end{forest}
+	\end{center}
+	Do a \textbf{right rotation} at 80. (Not the root this time. Everything above 80 stays where it is.)
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newpage
+	\begin{center}
+		{\Large \textbf{Answers}}
+	\end{center}
+	
+	\section*{Answer 1}
+	30 rises and 50 drops to the right. 30 had no right child, so nothing crosses over.
+	\begin{center}
+		\begin{forest}
+			[30
+			[20
+			[10]
+			[,phantom]
+			]
+			[50
+			[,phantom]
+			[60]
+			]
+			]
+		\end{forest}
+	\end{center}
+	
+	\section*{Answer 2}
+	40 rises and 20 drops to the left. 40 had no left child, so nothing crosses over.
+	\begin{center}
+		\begin{forest}
+			[40
+			[20
+			[10]
+			[,phantom]
+			]
+			[50
+			[,phantom]
+			[60]
+			]
+			]
+		\end{forest}
+	\end{center}
+	
+	\section*{Answer 3}
+	30 rises and 60 drops to the right. 30's old right child, 40 (with its child 50), crosses over and becomes 60's left child.
+	\begin{center}
+		\begin{forest}
+			[30
+			[20
+			[10]
+			[,phantom]
+			]
+			[60
+			[40
+			[,phantom]
+			[50]
+			]
+			[80]
+			]
+			]
+		\end{forest}
+	\end{center}
+	
+	\section*{Answer 4}
+	70 rises and 40 drops to the left. 70's old left child, 55 (with its child 50), crosses over and becomes 40's right child.
+	\begin{center}
+		\begin{forest}
+			[70
+			[40
+			[20]
+			[55
+			[50]
+			[,phantom]
+			]
+			]
+			[90
+			[,phantom]
+			[95]
+			]
+			]
+		\end{forest}
+	\end{center}
+	
+	\section*{Answer 5}
+	60 rises and 80 drops to the right. 60's old right child, 65, crosses over and becomes 80's left child. The left side (30, 20, 40) is untouched, and the root 50 now points to 60 on its right.
+	\begin{center}
+		\begin{forest}
+			[50
+			[30
+			[20]
+			[40]
+			]
+			[60
+			[55
+			[52]
+			[,phantom]
+			]
+			[80
+			[65]
+			[90]
+			]
+			]
+			]
+		\end{forest}
+	\end{center}
+	
+\end{document}
